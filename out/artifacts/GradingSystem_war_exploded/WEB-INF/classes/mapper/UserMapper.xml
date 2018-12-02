@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+    <insert id="addStudent" parameterType="entity.User">
+        INSERT INTO user(username, password, realname, phone, email, role, salt)
+        VALUES (#{username}, #{password}, #{realname}, #{phone}, #{email}, "student", #{salt});
+    </insert>
+
+    <insert id="addTeacher" parameterType="entity.User">
+        INSERT INTO user(username, password, realname, phone, email, role, salt)
+        VALUES (#{username}, #{password}, #{realname}, #{phone}, #{email}, "teacher", #{salt});
+    </insert>
+    
+    <delete id="deleteStudent">
+        DELETE FROM user
+        WHERE uid = #{uid};
+    </delete>
+
+    <update id="updateUserInfo" parameterType="entity.User">
+        UPDATE user
+        set phone = #{phone},
+            email = #{email}
+    </update>
+
+    <select id="getByName" resultType="entity.User">
+        SELECT *
+        FROM user
+        WHERE username = #{username}
+    </select>
+
+    <select id="getById" resultType="entity.User">
+        SELECT *
+        FROM user
+        WHERE uid = #{uid}
+    </select>
+
+    <select id="getAllStudents" resultType="entity.User">
+        SELECT *
+        FROM user
+    </select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CourseMapper">
+    <insert id="addCourse" parameterType="entity.Course">
+        INSERT INTO course (u_id, name, code, credit)
+        VALUES (#{uid}, #{name}, #{code}, #{credit})
+    </insert>
+
+    <update id="updateCourseInfo" parameterType="entity.Course">
+        UPDATE course SET
+        uid = #{uid}
+        name = #{name},
+        code = #{code},
+        credit = #{credit}
+    </update>
+
+    <select id="getCoursesByTeacher" resultType="entity.Course">
+        SELECT c.*
+        FROM course AS c
+        WHERE c.uid = #{uid};
+    </select>
+
+    <select id="getCoursesByStudent" resultType="entity.Course">
+        SELECT c.*
+        FROM course AS c, course_student AS cs
+        WHERE c.cid = cs.cid
+        AND cs.uid = #{uid};
+    </select>
+
+    <select id="getCourseList" resultType="entity.Course">
+        SELECT *
+        FROM course
+    </select>
+</mapper>
