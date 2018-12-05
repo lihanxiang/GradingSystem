@@ -3,10 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.AnswerMapper">
+    <insert id="writeAnswer" parameterType="entity.Answer">
+        INSERT INTO answer (qid, uid, answer)
+        VALUES (#{qid}, #{uid}, #{answer})
+    </insert>
+
+    <update id="changeAnswerStatus">
+        UPDATE answer
+        SET tag = 1
+        WHERE anid = #{anid}
+    </update>
+
     <select id="getAnswerForQuestion" resultType="entity.Answer">
         SELECT an.*
         FROM answer AS an, user AS u
         WHERE an.uid = u.uid
         AND an.qid = #{qid}
+    </select>
+    <select id="getAnswerStatus" parameterType="entity.Answer">
+        SELECT tag
+        FROM answer
+        WHERE qid = #{qid}
+        AND uid = #{uid}
     </select>
 </mapper>

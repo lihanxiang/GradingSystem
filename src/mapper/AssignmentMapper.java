@@ -8,6 +8,7 @@ import java.util.List;
 public interface AssignmentMapper {
 
     int addAssignmentToCourse(Assignment assignment, @Param("courseName") String courseName);
+    int addAssignmentToStudent()
 
     Assignment getAssignmentById(int aid);
     List<Assignment> getAssignmentByCourseName(String courseName);

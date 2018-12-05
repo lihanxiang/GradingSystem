@@ -18,9 +18,9 @@
 
     <select id="getAssignmentByCourseName" resultType="entity.Assignment">
         SELECT a.*
-        FROM course_assignment AS cs, assignment AS a
-        WHERE a.aid = cs.aid
-        AND cs.course_name = #{courseName};
+        FROM course AS c, assignment AS a
+        WHERE a.cid = c.cid
+        AND c.name = #{courseName};
     </select>
 
     <select id="getAssignmentByCourseForStudent" resultType="entity.Assignment">
