@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AnswerService {
 
-    int addAnswer(Answer answer);
+    int writeAnswer(Answer answer);
 
     List<Answer> getAnswerForQuestion(int qid);
 }

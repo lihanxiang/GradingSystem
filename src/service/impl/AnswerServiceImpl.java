@@ -15,8 +15,8 @@ public class AnswerServiceImpl implements AnswerService {
     private AnswerMapper answerMapper;
 
     @Override
-    public int addAnswer(Answer answer) {
-        return answerMapper.addAnswer(answer);
+    public int writeAnswer(Answer answer) {
+        return answerMapper.writeAnswer(answer);
     }
 
     @Override
