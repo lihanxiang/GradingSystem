@@ -1,16 +1,12 @@
 package mapper;
 
 import entity.Assignment;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface AssignmentMapper {
 
-    int addAssignmentToCourse(Assignment assignment, @Param("courseName") String courseName);
-    int addAssignmentToStudent()
-
+    int addAssignmentToCourse(Assignment assignment);
     Assignment getAssignmentById(int aid);
-    List<Assignment> getAssignmentByCourseName(String courseName);
-    List<Assignment> getAssignmentByCourseForStudent(@Param("courseName") String courseName, @Param("uid") int uid);
+    List<Assignment> getAssignmentByCourseCode(String code);
+    List<String> getStudentNameByAssignment(int aid);
 }

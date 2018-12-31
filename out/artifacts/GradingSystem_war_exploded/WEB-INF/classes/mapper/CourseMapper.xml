@@ -4,33 +4,61 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.CourseMapper">
     <insert id="addCourse" parameterType="entity.Course">
-        INSERT INTO course (u_id, name, code, credit)
-        VALUES (#{uid}, #{name}, #{code}, #{credit})
+        INSERT INTO course (code, uid, name, credit)
+        VALUES (#{code}, #{uid}, #{name}, #{credit})
+    </insert>
+
+    <insert id="addStudentToCourse">
+        INSERT INTO course_student(code, uid)
+        VALUES (#{code}, #{uid})
     </insert>
 
     <update id="updateCourseInfo" parameterType="entity.Course">
         UPDATE course SET
+        code = #{code},
         uid = #{uid}
         name = #{name},
-        code = #{code},
         credit = #{credit}
     </update>
+
+    <select id="getCourseByCode" resultType="entity.Course">
+        SELECT *
+        FROM course
+        WHERE code = #{code}
+    </select>
 
     <select id="getCoursesByTeacher" resultType="entity.Course">
         SELECT c.*
         FROM course AS c
-        WHERE c.uid = #{uid};
+        WHERE c.uid = #{uid}
     </select>
 
     <select id="getCoursesByStudent" resultType="entity.Course">
         SELECT c.*
         FROM course AS c, course_student AS cs
-        WHERE c.cid = cs.cid
-        AND cs.uid = #{uid};
+        WHERE cs.uid = #{uid}
+        AND c.code = cs.code;
     </select>
 
-    <select id="getCourseList" resultType="entity.Course">
+    <select id="getCourses" resultType="entity.Course">
         SELECT *
         FROM course
+    </select>
+
+    <select id="getStudentsByCourseCode" resultType="entity.User">
+        SELECT u.*
+        FROM course_student AS cs, user AS u
+        WHERE cs.uid = u.uid
+        AND u.role = 'student'
+        AND cs.code = #{code};
+    </select>
+
+    <select id="getStudentsNotInCourse" resultType="entity.User">
+        SELECT *
+        FROM user
+        WHERE uid NOT IN ( SELECT uid
+                            FROM course_student
+                            WHERE code = #{code})
+        AND role = 'student'
     </select>
 </mapper>

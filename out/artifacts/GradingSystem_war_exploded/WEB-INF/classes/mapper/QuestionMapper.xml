@@ -4,10 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.QuestionMapper">
     <insert id="addQuestionToAssignment" parameterType="entity.Question">
-        INSERT INTO question (title, weight)
-        VALUES (#{title}, #{weight});
-        INSERT INTO assignment_question(aid, qid)
-        VALUES (#{aid}, (SELECT COUNT(*) FROM question))
+        INSERT INTO question (aid, title, description, weight)
+        VALUES (#{aid}, #{title}, #{description}, #{weight});
     </insert>
 
     <select id="getQuestionById" resultType="entity.Question">
@@ -16,10 +14,15 @@
         WHERE qid = #{qid}
     </select>
 
-    <select id="getQusetionsByAssignment" resultType="entity.Question">
-        SELECT q.*
-        FROM question AS q, assignment as a
-        WHERE q.aid = a.aid
-        AND a.aid = #{id}
+    <select id="getQuestionWeight" resultType="Double">
+        SELECT weight
+        FROM question
+        WHERE qid = #{qid}
+    </select>
+
+    <select id="getQuestionsByAssignment" resultType="entity.Question">
+        SELECT *
+        FROM question
+        WHERE aid = #{aid}
     </select>
 </mapper>

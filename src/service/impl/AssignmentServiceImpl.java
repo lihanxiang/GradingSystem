@@ -1,7 +1,9 @@
 package service.impl;
 
 import entity.Assignment;
+import entity.User;
 import mapper.AssignmentMapper;
+import mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.AssignmentService;
@@ -18,8 +20,8 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public int addAssignmentToCourse(Assignment assignment, String courseName) {
-        return assignmentMapper.addAssignmentToCourse(assignment, courseName);
+    public int addAssignmentToCourse(Assignment assignment) {
+        return assignmentMapper.addAssignmentToCourse(assignment);
     }
 
     @Override
@@ -28,12 +30,12 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public List<Assignment> getAssignmentByCourseName(String courseName) {
-        return assignmentMapper.getAssignmentByCourseName(courseName);
+    public List<Assignment> getAssignmentByCourseCode(String code) {
+        return assignmentMapper.getAssignmentByCourseCode(code);
     }
 
     @Override
-    public List<Assignment> getAssignmentByCourseForStudent(String courseName, int uid) {
-        return assignmentMapper.getAssignmentByCourseForStudent(courseName, uid);
+    public List<String> getStudentNameByAssignment(int aid) {
+        return assignmentMapper.getStudentNameByAssignment(aid);
     }
 }

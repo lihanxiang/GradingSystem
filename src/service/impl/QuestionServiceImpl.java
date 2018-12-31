@@ -11,12 +11,16 @@ import java.util.List;
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
+    private final QuestionMapper questionMapper;
+
     @Autowired
-    private QuestionMapper questionMapper;
+    public QuestionServiceImpl(QuestionMapper questionMapper) {
+        this.questionMapper = questionMapper;
+    }
 
     @Override
-    public int addQuestionToAssignment(Question question, int aid) {
-        return questionMapper.addQuestionToAssignment(question, aid);
+    public int addQuestionToAssignment(Question question) {
+        return questionMapper.addQuestionToAssignment(question);
     }
 
     @Override
@@ -25,7 +29,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Question> getQusetionsByAssignment(int aid) {
-        return questionMapper.getQusetionsByAssignment(aid);
+    public Double getQuestionWeight(int qid) {
+        return questionMapper.getQuestionWeight(qid);
+    }
+
+    @Override
+    public List<Question> getQuestionsByAssignment(int aid) {
+        return questionMapper.getQuestionsByAssignment(aid);
     }
 }

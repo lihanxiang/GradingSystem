@@ -15,13 +15,16 @@
     
     <delete id="deleteStudent">
         DELETE FROM user
-        WHERE uid = #{uid};
+        WHERE uid = #{uid}
     </delete>
 
     <update id="updateUserInfo" parameterType="entity.User">
         UPDATE user
-        set phone = #{phone},
+        SET username = #{username},
+            realname = #{realname},
+            phone = #{phone},
             email = #{email}
+        WHERE uid = #{uid}
     </update>
 
     <select id="getByName" resultType="entity.User">

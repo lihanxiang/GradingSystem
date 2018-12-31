@@ -1,9 +1,13 @@
 package entity;
 
+import java.util.Date;
+
 public class Assignment {
     private int aid;
+    private String code;
     private String name;
     private int questionNum;
+    private String deadline;
 
     public int getAid() {
         return aid;
@@ -11,6 +15,14 @@ public class Assignment {
 
     public void setAid(int aid) {
         this.aid = aid;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -27,5 +39,13 @@ public class Assignment {
 
     public void setQuestionNum(int questionNum) {
         this.questionNum = questionNum;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
 }

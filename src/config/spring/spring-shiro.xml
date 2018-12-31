@@ -5,12 +5,13 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/user/pre_login"/>
-        <property name="unauthorizedUrl" value="/user/pre_login"/>
+        <property name="loginUrl" value="/user/pre-login"/>
+        <property name="unauthorizedUrl" value="/user/pre-login"/>
         <property name="filterChainDefinitions">
             <value>
                 /user/pre-login = anon
-                /user/main = user
+                /student/** = user
+                /teacher/** = user
                 /user/logout = logout
             </value>
         </property>

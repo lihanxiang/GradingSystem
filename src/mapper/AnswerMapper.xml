@@ -4,26 +4,70 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.AnswerMapper">
     <insert id="writeAnswer" parameterType="entity.Answer">
-        INSERT INTO answer (qid, uid, answer)
+        INSERT INTO answer(qid, uid, answer)
         VALUES (#{qid}, #{uid}, #{answer})
     </insert>
 
-    <update id="changeAnswerStatus">
+    <insert id="updateAnswer" parameterType="entity.Answer">
         UPDATE answer
-        SET tag = 1
-        WHERE anid = #{anid}
-    </update>
+        SET answer = #{answer}
+        WHERE qid = #{qid}
+        AND uid = #{uid}
+    </insert>
 
-    <select id="getAnswerForQuestion" resultType="entity.Answer">
-        SELECT an.*
-        FROM answer AS an, user AS u
-        WHERE an.uid = u.uid
-        AND an.qid = #{qid}
-    </select>
-    <select id="getAnswerStatus" parameterType="entity.Answer">
-        SELECT tag
+    <select id="checkAnswerDetail" resultType="entity.Answer">
+        SELECT *
         FROM answer
         WHERE qid = #{qid}
         AND uid = #{uid}
     </select>
+
+    <select id="getAnswerByTitleAndUsername" resultType="entity.Answer">
+        SELECT an.*
+        FROM answer AS an, question AS q, assignment AS a, user AS u
+        WHERE an.uid = u.uid
+        AND an.qid = q.qid
+        AND q.aid = a.aid
+        AND q.aid = #{aid}
+        AND q.title = #{title}
+        AND u.username = #{username}
+    </select>
+
+    <select id="getAnswerByTitle" resultType="entity.Answer">
+        SELECT an.*
+        FROM answer AS an, question AS q, user AS u, assignment AS a, course AS c
+        WHERE an.uid = u.uid
+        AND an.qid = q.qid
+        AND q.aid = a.aid
+        AND a.code = c.code
+        AND q.aid = #{aid}
+        AND c.code = #{code}
+        AND q.title = #{title}
+    </select>
+
+    <select id="getAnswerByUsername" resultType="entity.Answer">
+        SELECT an.*
+        FROM answer AS an, question AS q, user AS u, assignment AS a, course AS c
+        WHERE an.uid = u.uid
+        AND an.qid = q.qid
+        AND q.aid = a.aid
+        AND a.code = c.code
+        and q.aid = #{aid}
+        AND c.code = #{code}
+        AND u.username = #{username}
+    </select>
+
+    <select id="getById" resultType="entity.Answer">
+        SELECT *
+        FROM answer
+        WHERE anid = #{anid}
+    </select>
+
+    <update id="markAnswer" parameterType="entity.Answer">
+        UPDATE answer
+        SET tag = 1,
+        score = #{score},
+        evaluation = #{evaluation}
+        WHERE anid = #{anid}
+    </update>
 </mapper>

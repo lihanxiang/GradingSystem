@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.UserService;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "user")
 public class UserController {
 
     private final UserService userService;
@@ -59,6 +59,7 @@ public class UserController {
             subject.login(token);
             User _user = userService.getByName(user.getUsername());
             subject.getSession().setAttribute("id", _user.getUid());
+            subject.getSession().setAttribute("username", _user.getUsername());
             if (_user.getRole().equals("student")){
                 modelAndView = new ModelAndView("student/main");
             } else {
@@ -71,5 +72,11 @@ public class UserController {
             modelAndView.addObject("message", "用户名/密码错误");
         }
         return modelAndView;
+    }
+
+    @RequestMapping(value = "logout")
+    public String logout(){
+        SecurityUtils.getSubject().logout();
+        return "/user/login";
     }
 }

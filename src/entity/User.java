@@ -10,6 +10,17 @@ public class User {
     private String role;
     private String salt;
 
+    public User(String username, String password, String realname, String phone, String email) {
+        this.username = username;
+        this.password = password;
+        this.realname = realname;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public User() {
+    }
+
     public int getUid() {
         return uid;
     }

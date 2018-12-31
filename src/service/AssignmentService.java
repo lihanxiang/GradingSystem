@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface AssignmentService {
 
-    int addAssignmentToCourse(Assignment assignment, String courseName);
-
+    int addAssignmentToCourse(Assignment assignment);
     Assignment getAssignmentById(int aid);
-    List<Assignment> getAssignmentByCourseName(String courseName);
-    List<Assignment> getAssignmentByCourseForStudent(@Param("courseName") String courseName, @Param("uid") int uid);
+    List<Assignment> getAssignmentByCourseCode(String code);
+    List<String> getStudentNameByAssignment(int aid);
 }

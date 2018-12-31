@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SummaryMapper">
+    <insert id="writeSummary" parameterType="entity.Summary">
+        INSERT INTO summary(aid, uid, evaluation)
+        VALUES (#{aid}, #{uid}, #{evaluation})
+    </insert>
+
+    <select id="getSummaryOfStudent" resultType="entity.Summary">
+        SELECT *
+        FROM summary
+        WHERE aid = #{aid}
+        AND uid = #{uid}
+    </select>
+
+    <select id="getScoreOfAnswer" resultType="Double">
+        SELECT score
+        FROM answer
+        WHERE qid = #{qid}
+        AND uid = #{uid}
+    </select>
+
+    <select id="getScoreOfAssignment" resultType="Double">
+        SELECT SUM(an.score)
+        FROM answer as an, question AS q, assignment AS a
+        WHERE an.qid = q.qid
+        AND q.aid = a.aid
+        AND a.aid = #{aid}
+        AND an.uid = #{uid}
+        AND an.score != -1
+    </select>
+
+    <select id="getTotalScoreOfCourse" resultType="Double">
+        SELECT SUM(an.score)
+        FROM answer AS an, question AS q, assignment AS a, course AS c
+        WHERE an.qid = q.qid
+        AND a.code = c.code
+        AND q.aid = a.aid
+        AND an.uid = #{uid}
+        AND a.aid IN ( SELECT a.aid
+                        WHERE a.code = c.code
+                        AND c.code = #{code})
+    </select>
+</mapper>

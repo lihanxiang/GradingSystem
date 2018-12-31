@@ -2,10 +2,9 @@ package entity;
 
 public class Summary {
     private int sid;
-    private int uid;
     private int aid;
-    private double score;
-    private String comment;
+    private int uid;
+    private String evaluation;
 
     public int getSid() {
         return sid;
@@ -13,14 +12,6 @@ public class Summary {
 
     public void setSid(int sid) {
         this.sid = sid;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
     }
 
     public int getAid() {
@@ -31,19 +22,19 @@ public class Summary {
         this.aid = aid;
     }
 
-    public double getScore() {
-        return score;
+    public int getUid() {
+        return uid;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
-    public String getComment() {
-        return comment;
+    public String getEvaluation() {
+        return evaluation;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setEvaluation(String evaluation) {
+        this.evaluation = evaluation;
     }
 }

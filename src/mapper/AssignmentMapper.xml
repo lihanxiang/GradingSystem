@@ -4,31 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.AssignmentMapper">
     <insert id="addAssignmentToCourse">
-        INSERT INTO assignment(name, question_num)
-        VALUES (#{name}, #{questionNum});
-        INSERT INTO course_assignment (course_name, aid)
-        VALUES (#{courseName}, (SELECT COUNT (*) FROM assignment))
+        INSERT INTO assignment(code, name, questionnum, deadline)
+        VALUES (#{code}, #{name}, #{questionNum}, #{deadline});
     </insert>
 
     <select id="getAssignmentById" resultType="entity.Assignment">
         SELECT *
         FROM assignment
-        WHERE aid = #{id};
+        WHERE aid = #{aid};
     </select>
 
-    <select id="getAssignmentByCourseName" resultType="entity.Assignment">
-        SELECT a.*
-        FROM course AS c, assignment AS a
-        WHERE a.cid = c.cid
-        AND c.name = #{courseName};
+    <select id="getAssignmentByCourseCode" resultType="entity.Assignment">
+        SELECT *
+        FROM assignment
+        WHERE code = #{code}
     </select>
 
-    <select id="getAssignmentByCourseForStudent" resultType="entity.Assignment">
-        SELECT a.*
-        FROM assignment AS a, course AS c, assignment_student AS ast
-        WHERE a.aid = ast.aid
-        AND a.cid = c.cid
-        AND c.name = #{courseName}
-        AND ast.uid = #{uid}
+    <select id="getStudentNameByAssignment" resultType="String">
+        SELECT u.username
+        FROM course AS c, assignment AS a, course_student AS cs, user AS u
+        WHERE c.code = a.code
+        AND c.code = cs.code
+        AND cs.uid = u.uid
+        AND a.aid = #{aid}
     </select>
 </mapper>

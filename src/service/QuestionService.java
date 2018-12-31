@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface QuestionService {
 
-    int addQuestionToAssignment(Question question, int aid);
-
+    int addQuestionToAssignment(Question question);
     Question getQuestionById(int qid);
-    List<Question> getQusetionsByAssignment(int aid);
+    Double getQuestionWeight(int qid);
+    List<Question> getQuestionsByAssignment(int aid);
 }

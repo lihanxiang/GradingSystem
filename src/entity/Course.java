@@ -1,18 +1,17 @@
 package entity;
 
 public class Course {
-    private int cid;
+    private String code;
     private int uid;
     private String name;
-    private String code;
     private int credit;
 
-    public int getCid() {
-        return cid;
+    public String getCode() {
+        return code;
     }
 
-    public void setCid(int cid) {
-        this.cid = cid;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public int getUid() {
@@ -29,14 +28,6 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public int getCredit() {

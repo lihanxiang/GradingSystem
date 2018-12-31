@@ -5,6 +5,9 @@ public class Answer {
     private int qid;
     private int uid;
     private String answer;
+    private int tag;
+    private double score;
+    private String evaluation;
 
     public int getAnid() {
         return anid;
@@ -36,5 +39,29 @@ public class Answer {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public int getTag() {
+        return tag;
+    }
+
+    public void setTag(int tag) {
+        this.tag = tag;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public String getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(String evaluation) {
+        this.evaluation = evaluation;
     }
 }

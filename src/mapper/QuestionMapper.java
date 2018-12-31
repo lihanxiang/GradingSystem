@@ -1,15 +1,12 @@
 package mapper;
 
-import entity.Assignment;
 import entity.Question;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface QuestionMapper {
 
-    int addQuestionToAssignment(Question question, @Param("aid") int aid);
-
+    int addQuestionToAssignment(Question question);
     Question getQuestionById(int qid);
-    List<Question> getQusetionsByAssignment(int aid);
+    Double getQuestionWeight(int qid);
+    List<Question> getQuestionsByAssignment(int aid);
 }
